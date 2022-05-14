@@ -40,6 +40,8 @@ phases:
        - ls -la
        - cd flask-app
        - ls -la
+       - aws --version
+       - docker --version
   #post_build:
     #commands:
       # - command
