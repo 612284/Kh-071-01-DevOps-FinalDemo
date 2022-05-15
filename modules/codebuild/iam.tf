@@ -38,6 +38,14 @@ resource "aws_iam_role_policy" "cobebuild_policy" {
     {
       "Effect": "Allow",
       "Action": [
+        "ecr:*",
+        "ecs:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
         "ec2:CreateNetworkInterface",
         "ec2:DescribeDhcpOptions",
         "ec2:DescribeNetworkInterfaces",
