@@ -20,15 +20,15 @@ version: 0.2
   #build-matrix:
   #build-graph:
 phases:
-  #install:
-    #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
-    #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
-    #runtime-versions:
-      # name: version
-      # name: version
-    #commands:
-      # - command
-      # - command
+  install:    
+    commands:
+      - echo "$TERRAFORM_VERSION"
+      - curl -sSL "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" -o terraform.zip
+      - unzip terraform.zip -d /usr/local/bin && chmod +x /usr/local/bin/terraform
+      - curl -sSL https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -o terragrunt
+      - mv terragrunt /usr/local/bin/ && chmod +x /usr/local/bin/terragrunt
+      - terraform --version
+      - terragrunt --version
   #pre_build:
     #commands:
       # - command
