@@ -1,4 +1,4 @@
-resource "aws_alb" "test" {
+resource "aws_alb" "this" {
   name               = "alb-tf-${var.env}-${var.app_name}"
   internal           = false
   load_balancer_type = "application"
@@ -55,7 +55,7 @@ resource "aws_security_group" "alb" {
 }
 
 resource "aws_alb_listener" "http" {
-  load_balancer_arn = aws_alb.test.arn
+  load_balancer_arn = aws_alb.this.arn
   port              = "80"
   protocol          = "HTTP"
 

@@ -20,7 +20,7 @@ version: 0.2
   #build-matrix:
   #build-graph:
 phases:
-  install:    
+  install:
     commands:
       - echo "$TERRAFORM_VERSION"
       - curl -sSL "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" -o terraform.zip
@@ -30,6 +30,8 @@ phases:
       - pip install jq
       - terraform --version
       - terragrunt --version
+      - ls "$CODEBUILD_SRC_DIR"
+      - pwd
   #pre_build:
     #commands:
       # - command

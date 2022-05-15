@@ -125,7 +125,6 @@ resource "aws_security_group" "worker" {
   }
 }
 
-
 data "aws_ami" "latest_amason_linyx" {
   owners      = ["591542846629"]
   most_recent = true
