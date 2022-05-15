@@ -31,11 +31,16 @@ phases:
       - terraform --version
       - terragrunt --version
       - ls "$CODEBUILD_SRC_DIR"
+      - ls "$CODEBUILD_SRC_DIR_app"
       - pwd
-  #pre_build:
-    #commands:
-      # - command
-      # - command
+  pre_build:
+    commands:
+      - export REGISTRY_ID=`aws sts get-caller-identity --output text | awk '{print $1}'`
+      - export REPO_NAME="${REGISTRY_ID}.dkr.ecr.${REGION}.amazonaws.com/${APP_NAME}"
+      - export SERVICE_ARN=$(aws ecs list-services --cluster worker-${ENV}-${APP_NAME} | jq -r .serviceArns[])
+      - export TASKDEF_ARN=$(aws ecs describe-services --cluster worker-${ENV}-${APP_NAME} --service ${SERVICE_ARN} | jq -r .services[].taskDefinition)
+      - export EXISTING_TAG=$(aws ecs describe-task-definition --task-definition ${TASKDEF_ARN} | jq -r .taskDefinition.containerDefinitions[].image | tr ':' ' ' | awk '{print $2}')
+      - echo "Current version is ${EXISTING_TAG}"
   build:
     commands:
        - echo "hello"

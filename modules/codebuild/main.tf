@@ -18,10 +18,21 @@ resource "aws_codebuild_project" "this" {
       name  = "TERRAFORM_VERSION"
       value = "1.1.9"
     }
-
     environment_variable {
       name  = "TERRAGRUNT_VERSION"
       value = "0.37.0"
+    }
+    environment_variable {
+      name  = "APP_NAME"
+      value = var.app_name
+    }
+    environment_variable {
+      name  = "ENV"
+      value = var.env
+    }
+    environment_variable {
+      name  = "REGION"
+      value = var.region
     }
   }
 
@@ -35,7 +46,7 @@ resource "aws_codebuild_project" "this" {
   source {
     buildspec           = "env/${var.env}/buildspec.yml"
     type                = "GITHUB"
-    location            = "https://github.com/612284/Kh-071-01-DevOps-FinalDemo.git"
+    location            = var.github_url_iac
     git_clone_depth     = 1
     report_build_status = "true"
 

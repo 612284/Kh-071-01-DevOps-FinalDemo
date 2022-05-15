@@ -18,3 +18,8 @@ variable "github_url_app" {
   type        = string
   default     = ""
 }
+variable "github_url_iac" {
+  description = "github url infrastructure as code"
+  type        = string
+  default     = ""
+}
