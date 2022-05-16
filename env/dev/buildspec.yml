@@ -36,10 +36,11 @@ phases:
       - whoami
       - cat /proc/version
       - ls -la /var/run/
+      - ps aux | grep docker
       # - yum install -y docker-ce docker-ce-cli
       # - chmod 660 /var/run/docker.sock
-      - newgrp docker
-      - usermod -a -G docker $USER
+      # - newgrp docker
+      # - usermod -a -G docker $USER
       # - newgrp docker
   pre_build:
     commands:
