@@ -7,11 +7,17 @@ resource "aws_codebuild_project" "this" {
   artifacts {
     type = "NO_ARTIFACTS"
   }
+  vpc_config {
+    vpc_id             = var.vpc_id
+    subnets            = var.private_subnets_id
+    security_group_ids = [aws_security_group.codebuild_sg.id]
+  }
 
   environment {
-    compute_type = "BUILD_GENERAL1_SMALL"
-    image        = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
-    type         = "LINUX_CONTAINER"
+    compute_type    = "BUILD_GENERAL1_SMALL"
+    image           = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
+    type            = "LINUX_CONTAINER"
+    privileged_mode = true
     # image_pull_credentials_type = "CODEBUILD"
 
     environment_variable {
@@ -63,5 +69,34 @@ resource "aws_codebuild_project" "this" {
 
   tags = {
     Environment = "${var.env}"
+  }
+}
+resource "aws_security_group" "codebuild_sg" {
+  vpc_id = var.vpc_id
+  name   = "codebuild security group"
+  # dynamic "ingress" {
+  #   for_each = var.sg_bas_ingress_ports
+  #   content {
+  #     from_port   = ingress.value
+  #     to_port     = ingress.value
+  #     protocol    = "tcp"
+  #     cidr_blocks = ["0.0.0.0/0"]
+  #   }
+  # }
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name = "codebuild security group"
   }
 }

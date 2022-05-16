@@ -11,7 +11,6 @@ dependency "vpc" {
     public_subnets_id = ["subnet-00000000000","subnet-00000000001" ]
     private_subnets_id = ["subnet-00000000002", "subnet-00000000003"]
   }
-
 }
 
 dependency "ecr" {
@@ -19,8 +18,8 @@ dependency "ecr" {
   mock_outputs = {
     ecr_url = "vpc-000000000000"
   }
-
 }
+
 dependencies {
     paths = ["../local_build"]
 }

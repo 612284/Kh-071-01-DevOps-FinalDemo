@@ -26,6 +26,21 @@ resource "aws_iam_role_policy" "cobebuild_policy" {
   "Statement": [
     {
       "Effect": "Allow",
+      "Action": [
+        "ec2:CreateNetworkInterfacePermission"
+      ],
+      "Resource": "arn:aws:ec2:${var.region}:*:network-interface/*",
+      "Condition": {
+        "StringLike": {
+          "ec2:Subnet": [
+            "arn:aws:ec2:${var.region}:*:subnet/*"
+          ],
+          "ec2:AuthorizedService": "codebuild.amazonaws.com"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
       "Resource": [
         "*"
       ],

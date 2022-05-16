@@ -26,10 +26,10 @@ locals {
       az   = "eu-central-1a"
       cidr = "10.0.1.0/24"
     }
-    subnet_2 = {
-      az   = "eu-central-1b"
-      cidr = "10.0.2.0/24"
-    }
+    # subnet_2 = {
+    #   az   = "eu-central-1b"
+    #   cidr = "10.0.2.0/24"
+    # }
   }
   public_subnets_map = {
     subnet_1 = {

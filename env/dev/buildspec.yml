@@ -36,13 +36,7 @@ phases:
       - whoami
       - cat /proc/version
       - ls -la /var/run/
-      # - ps aux | grep docker
-      # - service docker start
-      # - yum install -y docker-ce docker-ce-cli
-      # - chmod 660 /var/run/docker.sock
-      # - newgrp docker
-      # - usermod -a -G docker $USER
-      # - newgrp docker
+      - aws sts get-caller-identity    
   pre_build:
     commands:
       - export REGISTRY_ID=`aws sts get-caller-identity --output text | awk '{print $1}'`

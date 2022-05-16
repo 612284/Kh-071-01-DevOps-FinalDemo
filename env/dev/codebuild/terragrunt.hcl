@@ -7,8 +7,19 @@ include {
 dependencies {
     paths = ["../claster"]
 }
-# inputs = {
-#     # vpc_id = dependency.cluster.outputs.vpc_id
-#     # subnets = dependency.cluster.outputs.subnets
-#     build_spec = "env/dev/buildspec.yml"
-# }
+
+dependency "vpc" {
+  config_path = "../vpc"
+  mock_outputs = {
+    vpc_id = "vpc-000000000000"
+    public_subnets_id = ["subnet-00000000000","subnet-00000000001" ]
+    private_subnets_id = ["subnet-00000000002", "subnet-00000000003"]
+  }
+
+}
+inputs = {
+  private_subnets_id = dependency.vpc.outputs.private_subnets_id
+  public_subnets_id = dependency.vpc.outputs.public_subnets_id
+  vpc_id = dependency.vpc.outputs.vpc_id
+    build_spec = "env/dev/buildspec.yml"
+}
