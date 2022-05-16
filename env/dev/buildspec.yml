@@ -34,7 +34,8 @@ phases:
       - ls "$CODEBUILD_SRC_DIR_app"
       - docker --version
       - whoami
-      - chmod 660 /var/run/docker.sock
+      - sudo chmod 660 /var/run/docker.sock
+      - sudo usermod -a -G docker root
   pre_build:
     commands:
       - export REGISTRY_ID=`aws sts get-caller-identity --output text | awk '{print $1}'`
