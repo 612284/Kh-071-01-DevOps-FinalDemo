@@ -34,6 +34,7 @@ phases:
       - ls "$CODEBUILD_SRC_DIR_app"
       - docker --version
       - whoami
+      - cat /proc/version
       # - chmod 660 /var/run/docker.sock
       # - gpasswd -a $USER docker
   pre_build:
