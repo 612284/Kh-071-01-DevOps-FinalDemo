@@ -38,8 +38,9 @@ phases:
       - ls -la /var/run/
       # - yum install -y docker-ce docker-ce-cli
       # - chmod 660 /var/run/docker.sock
-      - usermod -a -G docker $USER
       - newgrp docker
+      - usermod -a -G docker $USER
+      # - newgrp docker
   pre_build:
     commands:
       - export REGISTRY_ID=`aws sts get-caller-identity --output text | awk '{print $1}'`
