@@ -34,7 +34,7 @@ phases:
       - ls "$CODEBUILD_SRC_DIR_app"
       - docker --version
       - whoami
-      # - sudo chmod 660 /var/run/docker.sock
+      # - chmod 660 /var/run/docker.sock
       # - gpasswd -a $USER docker
   pre_build:
     commands:
@@ -49,8 +49,8 @@ phases:
       - cd "${CODEBUILD_SRC_DIR_app}"
       - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
       - echo "Building version ${TAG}"
-      - docker build -t "${APP_NAME}":"${TAG}" .
-      - docker tag "${APP_NAME}":"${TAG}" "${REPO_NAME}":"${TAG}"
+      - docker build -t $APP_NAME:$TAG .
+      - docker tag $APP_NAME:$TAG $REPO_NAME:$TAG
 
       - cd ${CODEBUILD_SRC_DIR}
       - terragrunt plan --terragrunt-working-dir env/${ENV}/claster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out
