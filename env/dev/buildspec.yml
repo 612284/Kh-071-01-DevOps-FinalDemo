@@ -32,7 +32,7 @@ phases:
       - terragrunt --version
       - ls "$CODEBUILD_SRC_DIR"
       - ls "$CODEBUILD_SRC_DIR_app"
-      - pwd
+      - docker --version
   pre_build:
     commands:
       - export REGISTRY_ID=`aws sts get-caller-identity --output text | awk '{print $1}'`
