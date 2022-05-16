@@ -35,6 +35,7 @@ phases:
       - docker --version
       - whoami
       - cat /proc/version
+      - ls -la /var/run/
       # - yum install -y docker-ce docker-ce-cli
       # - chmod 660 /var/run/docker.sock
       # - gpasswd -a $USER docker
