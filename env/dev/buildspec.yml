@@ -35,7 +35,7 @@ phases:
       - docker --version
       - whoami
       # - sudo chmod 660 /var/run/docker.sock
-      - gpasswd -a $USER docker
+      # - gpasswd -a $USER docker
   pre_build:
     commands:
       - export REGISTRY_ID=`aws sts get-caller-identity --output text | awk '{print $1}'`
@@ -47,7 +47,7 @@ phases:
   build:
     commands:
       - cd "${CODEBUILD_SRC_DIR_app}"
-      - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-"
+      - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
       - echo "Building version ${TAG}"
       - docker build -t "${APP_NAME}":"${TAG}" .
       - docker tag "${APP_NAME}":"${TAG}" "${REPO_NAME}":"${TAG}"
