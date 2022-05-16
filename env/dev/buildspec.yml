@@ -37,6 +37,7 @@ phases:
       - cat /proc/version
       - ls -la /var/run/
       - ps aux | grep docker
+      - systemctl start docker
       # - yum install -y docker-ce docker-ce-cli
       # - chmod 660 /var/run/docker.sock
       # - newgrp docker
