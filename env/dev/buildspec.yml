@@ -54,6 +54,7 @@ phases:
       - ls -la
       - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
       - echo "Building version ${TAG}"
+      - echo $APP_NAME
       - docker build -t $APP_NAME:$TAG .
       - docker tag $APP_NAME:$TAG $REPO_NAME:$TAG
 
