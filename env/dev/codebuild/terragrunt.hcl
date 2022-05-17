@@ -17,8 +17,8 @@ dependency "vpc" {
   }
 }
 
-# inputs = {
-#   private_subnets_id = dependency.vpc.outputs.private_subnets_id
-#   public_subnets_id = dependency.vpc.outputs.public_subnets_id
-#   vpc_id = dependency.vpc.outputs.vpc_id
-# }
+inputs = {
+  private_subnets_id = dependency.vpc.outputs.private_subnets_id
+  public_subnets_id = dependency.vpc.outputs.public_subnets_id
+  vpc_id = dependency.vpc.outputs.vpc_id
+}

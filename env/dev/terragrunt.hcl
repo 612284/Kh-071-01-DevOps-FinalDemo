@@ -1,7 +1,7 @@
 # Indicate what region to deploy the resources into
 generate "provider" {
   path = "provider.tf"
-  if_exists = "overwrite_terragrunt"
+  if_exists = "skip"
   contents = <<EOF
 provider "aws" {
   region = "eu-central-1"
@@ -69,7 +69,7 @@ remote_state {
   backend = "s3"
   generate = {
     path      = "backend.tf"
-    if_exists = "overwrite_terragrunt"
+    if_exists = "skip"
   }
   config = {
     bucket = "my-terraform-state-${local.env}-${local.app_name}"

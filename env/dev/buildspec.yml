@@ -48,17 +48,19 @@ phases:
   build:
     commands:
       - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $REGISTRY_ID.dkr.ecr.$REGION.amazonaws.com
-      - cd "${CODEBUILD_SRC_DIR_app}"
-      - ls -la
-      - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
-      - echo "Building version ${TAG}"
-      - echo $APP_NAME
-      - docker build -t $APP_NAME:$TAG .
-      - docker tag $APP_NAME:$TAG $REPO_NAME:$TAG
-
-      - cd ${CODEBUILD_SRC_DIR}
-      - ls ${CODEBUILD_SRC_DIR}/env/dev/claster/
-      - terragrunt plan --terragrunt-working-dir env/dev/claster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out
+      - ls -la $HOME/.aws/
+      # - cd "${CODEBUILD_SRC_DIR_app}"
+      # - ls -la
+      # - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
+      # - echo "Building version ${TAG}"
+      # - echo $APP_NAME
+      # - docker build -t $APP_NAME:$TAG .
+      # - docker tag $APP_NAME:$TAG $REPO_NAME:$TAG
+      #
+      # - cd ${CODEBUILD_SRC_DIR}
+      # - ls ${CODEBUILD_SRC_DIR}/env/dev/claster/
+      # - terragrunt plan --terragrunt-working-dir env/dev/claster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out
+      # ----------------------------------------------------------------------------------------------------------------------
       # - terragrunt apply --terragrunt-working-dir providers/${ENV}/claster/ -auto-approve -no-color -input=false plan.out
   #post_build:
     #commands:
