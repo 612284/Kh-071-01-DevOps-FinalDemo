@@ -19,6 +19,14 @@ resource "aws_codebuild_project" "this" {
     type            = "LINUX_CONTAINER"
     privileged_mode = true
     # image_pull_credentials_type = "CODEBUILD"
+    environment_variable {
+      name  = "ACCESS_KEY"
+      value = var.aws_access_key_id
+    }
+    environment_variable {
+      name  = "SECRET_KEY"
+      value = var.aws_secret_access_key
+    }
 
     environment_variable {
       name  = "TERRAFORM_VERSION"
