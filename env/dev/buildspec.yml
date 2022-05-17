@@ -48,7 +48,8 @@ phases:
   build:
     commands:
       - aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $REGISTRY_ID.dkr.ecr.$REGION.amazonaws.com
-      - echo  $aws_access_key_id
+      - echo  "${aws_access_key_id}"
+      - echo  "${aws_secret_access_key}"
       # - cd "${CODEBUILD_SRC_DIR_app}"
       # - ls -la
       # - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
