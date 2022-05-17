@@ -45,7 +45,7 @@ resource "aws_codebuild_project" "this" {
       value = var.env
     }
     environment_variable {
-      name  = "REGION"
+      name  = "AWS_DEFAULT_REGION"
       value = var.region
     }
   }
