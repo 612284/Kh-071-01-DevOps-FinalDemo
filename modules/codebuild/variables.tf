@@ -38,11 +38,11 @@ variable "vpc_id" {
   type        = string
   default     = ""
 }
-variable "aws_access_key_id" {
+variable "AWS_ACCESS_KEY_ID" {
   type    = string
   default = ""
 }
-variable "aws_secret_access_key" {
+variable "AWS_SECRET_ACCESS_KEY" {
   type    = string
   default = ""
 }
