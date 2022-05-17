@@ -36,7 +36,7 @@ phases:
       - whoami
       - cat /proc/version
       - ls -la /var/run/
-      - aws sts get-caller-identity    
+      - aws sts get-caller-identity
   pre_build:
     commands:
       - export REGISTRY_ID=`aws sts get-caller-identity --output text | awk '{print $1}'`
@@ -57,7 +57,8 @@ phases:
       - docker tag $APP_NAME:$TAG $REPO_NAME:$TAG
 
       - cd ${CODEBUILD_SRC_DIR}
-      - terragrunt plan --terragrunt-working-dir env/${ENV}/claster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out
+      - ls ${CODEBUILD_SRC_DIR}env/${ENV}/claster/
+      - terragrunt plan --terragrunt-working-dir env/${ENV}/claster/ -var="tag=${TAG}" -no-color -input=false -out plan.out
       # - terragrunt apply --terragrunt-working-dir providers/${ENV}/claster/ -auto-approve -no-color -input=false plan.out
   #post_build:
     #commands:

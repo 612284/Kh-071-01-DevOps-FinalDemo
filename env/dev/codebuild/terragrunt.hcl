@@ -15,11 +15,10 @@ dependency "vpc" {
     public_subnets_id = ["subnet-00000000000","subnet-00000000001" ]
     private_subnets_id = ["subnet-00000000002", "subnet-00000000003"]
   }
+}
 
-}
-inputs = {
-  private_subnets_id = dependency.vpc.outputs.private_subnets_id
-  public_subnets_id = dependency.vpc.outputs.public_subnets_id
-  vpc_id = dependency.vpc.outputs.vpc_id
-    build_spec = "env/dev/buildspec.yml"
-}
+# inputs = {
+#   private_subnets_id = dependency.vpc.outputs.private_subnets_id
+#   public_subnets_id = dependency.vpc.outputs.public_subnets_id
+#   vpc_id = dependency.vpc.outputs.vpc_id
+# }

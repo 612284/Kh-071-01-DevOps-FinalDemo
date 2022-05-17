@@ -15,22 +15,22 @@ resource "aws_internet_gateway" "gw" {
   }
 }
 
-resource "aws_eip" "nat_eip" {
-  for_each = var.private_subnets_map
-
-  vpc = true
-}
-
-resource "aws_nat_gateway" "nat" {
-  for_each = var.private_subnets_map
-
-  allocation_id = aws_eip.nat_eip[each.key].id
-  subnet_id     = aws_subnet.public[each.key].id
-
-  tags = {
-    Name = format("NAT for -%s-%s-%s", each.value["az"], var.env, var.app_name)
-  }
-}
+# resource "aws_eip" "nat_eip" {
+#   for_each = var.private_subnets_map
+#
+#   vpc = true
+# }
+#
+# resource "aws_nat_gateway" "nat" {
+#   for_each = var.private_subnets_map
+#
+#   allocation_id = aws_eip.nat_eip[each.key].id
+#   subnet_id     = aws_subnet.public[each.key].id
+#
+#   tags = {
+#     Name = format("NAT for -%s-%s-%s", each.value["az"], var.env, var.app_name)
+#   }
+# }
 
 resource "aws_subnet" "public" {
   for_each = var.public_subnets_map
@@ -75,10 +75,10 @@ resource "aws_route_table" "private" {
   for_each = var.private_subnets_map
   vpc_id   = aws_vpc.this.id
 
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_nat_gateway.nat[each.key].id
-  }
+  # route {
+  #   cidr_block = "0.0.0.0/0"
+  #   gateway_id = aws_nat_gateway.nat[each.key].id
+  # }
 
   tags = {
     Name = format("private route table in -%s-%s-%s", each.value["az"], var.env, var.app_name)

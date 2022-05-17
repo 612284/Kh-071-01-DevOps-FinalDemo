@@ -7,11 +7,11 @@ resource "aws_codebuild_project" "this" {
   artifacts {
     type = "NO_ARTIFACTS"
   }
-  vpc_config {
-    vpc_id             = var.vpc_id
-    subnets            = var.private_subnets_id
-    security_group_ids = [aws_security_group.codebuild_sg.id]
-  }
+  # vpc_config {
+  #   vpc_id             = var.vpc_id
+  #   subnets            = var.private_subnets_id
+  #   security_group_ids = [aws_security_group.codebuild_sg.id]
+  # }
 
   environment {
     compute_type    = "BUILD_GENERAL1_SMALL"
