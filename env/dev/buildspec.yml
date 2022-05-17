@@ -57,8 +57,8 @@ phases:
       - docker tag $APP_NAME:$TAG $REPO_NAME:$TAG
 
       - cd ${CODEBUILD_SRC_DIR}
-      - ls ${CODEBUILD_SRC_DIR}env/${ENV}/claster/
-      - terragrunt plan --terragrunt-working-dir env/${ENV}/claster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out
+      - ls ${CODEBUILD_SRC_DIR}/env/dev/claster/
+      - terragrunt plan --terragrunt-working-dir env/dev/claster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out
       # - terragrunt apply --terragrunt-working-dir providers/${ENV}/claster/ -auto-approve -no-color -input=false plan.out
   #post_build:
     #commands:
