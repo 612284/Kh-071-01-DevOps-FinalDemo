@@ -64,12 +64,12 @@ phases:
 
       - cd ${CODEBUILD_SRC_DIR}
       - ls ${CODEBUILD_SRC_DIR}/env/dev/claster/
-      - terragrunt plan --terragrunt-working-dir env/dev/claster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out      
+      - terragrunt plan --terragrunt-working-dir env/dev/claster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out
       - terragrunt apply --terragrunt-working-dir env/dev/claster/ -auto-approve -no-color -input=false plan.out
-  #post_build:
-    #commands:
-      # - command
-      # - command
+  post_build:
+    commands:
+      - docker tag $APP_NAME:$TAG $REGISTRY_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com:$TAG
+      - docker push $REGISTRY_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com:$TAG
 #reports:
   #report-name-or-arn:
     #files:
