@@ -68,8 +68,9 @@ phases:
       - terragrunt apply --terragrunt-working-dir env/dev/claster/ -auto-approve -no-color -input=false plan.out
   post_build:
     commands:
-      - docker tag $APP_NAME:$TAG $REGISTRY_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com:$TAG
-      - docker push $REGISTRY_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com:$TAG
+      - docker images
+      - docker tag ${APP_NAME}:${TAG} ${REGISTRY_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com:${TAG}
+      - docker push ${REGISTRY_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com:${TAG}
 #reports:
   #report-name-or-arn:
     #files:
