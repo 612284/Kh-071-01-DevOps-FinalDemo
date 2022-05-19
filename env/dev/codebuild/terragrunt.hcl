@@ -5,7 +5,7 @@ include {
   path = find_in_parent_folders()
 }
 dependencies {
-    paths = ["../claster"]
+    paths = ["../cluster"]
 }
 
 dependency "vpc" {

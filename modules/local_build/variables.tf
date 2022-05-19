@@ -28,3 +28,8 @@ variable "app_tag" {
   type        = string
   default     = ""
 }
+variable "profile" {
+  description = ""
+  type        = string
+  default     = ""
+}

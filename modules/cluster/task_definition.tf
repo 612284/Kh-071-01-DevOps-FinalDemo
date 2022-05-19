@@ -15,10 +15,10 @@ data "template_file" "task_definition_template" {
 }
 
 resource "aws_cloudwatch_log_group" "awslogs-group" {
-  name = "claster-${var.env}-${var.app_name}"
+  name = "cluster-${var.env}-${var.app_name}"
 }
 
 resource "aws_cloudwatch_log_stream" "awslogs-stream" {
-  name           = "claster-stream-${var.env}-${var.app_name}"
+  name           = "cluster-stream-${var.env}-${var.app_name}"
   log_group_name = aws_cloudwatch_log_group.awslogs-group.name
 }

@@ -8,6 +8,16 @@ variable "env" {
   type        = string
   default     = ""
 }
+variable "profile" {
+  description = ""
+  type        = string
+  default     = ""
+}
+variable "region" {
+  description = "region"
+  type        = string
+  default     = ""
+}
 variable "app_name" {
   description = ""
   type        = string

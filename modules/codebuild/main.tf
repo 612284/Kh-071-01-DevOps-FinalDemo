@@ -14,19 +14,19 @@ resource "aws_codebuild_project" "this" {
   # }
 
   environment {
-    compute_type    = "BUILD_GENERAL1_SMALL"
-    image           = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
-    type            = "LINUX_CONTAINER"
-    privileged_mode = true
-    # image_pull_credentials_type = "CODEBUILD"
-    environment_variable {
-      name  = "AWS_ACCESS_KEY_ID"
-      value = var.AWS_ACCESS_KEY_ID
-    }
-    environment_variable {
-      name  = "AWS_SECRET_ACCESS_KEY"
-      value = var.AWS_SECRET_ACCESS_KEY
-    }
+    compute_type                = "BUILD_GENERAL1_SMALL"
+    image                       = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
+    type                        = "LINUX_CONTAINER"
+    privileged_mode             = true
+    image_pull_credentials_type = "CODEBUILD"
+    # environment_variable {
+    #   name  = "AWS_ACCESS_KEY_ID"
+    #   value = var.AWS_ACCESS_KEY_ID
+    # }
+    # environment_variable {
+    #   name  = "AWS_SECRET_ACCESS_KEY"
+    #   value = var.AWS_SECRET_ACCESS_KEY
+    # }
 
     environment_variable {
       name  = "TERRAFORM_VERSION"

@@ -64,3 +64,8 @@ variable "env" {
   type        = string
   default     = ""
 }
+variable "profile" {
+  description = ""
+  type        = string
+  default     = ""
+}

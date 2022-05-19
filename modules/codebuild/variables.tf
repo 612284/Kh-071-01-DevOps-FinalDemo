@@ -46,3 +46,8 @@ variable "AWS_SECRET_ACCESS_KEY" {
   type    = string
   default = ""
 }
+variable "profile" {
+  description = ""
+  type        = string
+  default     = ""
+}

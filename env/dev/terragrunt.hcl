@@ -1,21 +1,10 @@
-# Indicate what region to deploy the resources into
-generate "provider" {
-  path = "provider.tf"
-  if_exists = "skip"
-  contents = <<EOF
-provider "aws" {
-  region = "eu-central-1"
-}
-EOF
-}
 locals {
   region               = "eu-central-1"
+  profile              = "default"
   cidr                 = "10.0.0.0/16"
   instance_type        = "t2.micro"
-  key_name_bastion     = "xxxxxxxxxxxxxx"
   sg_alb_ingress_ports = ["80"]
-  sg_bas_ingress_ports = ["22"]
-  sg_asg_ingress_ports = ["49153", "49154", "49155", "49156", "49157", "22"]
+  sg_asg_ingress_ports = ["49153", "49154", "49155", "49156", "49157"]
   github_url_app       = "https://github.com/612284/flask-app.git"
   github_url_iac       = "https://github.com/612284/Kh-071-01-DevOps-FinalDemo.git"
   app_name             = "flask"
@@ -46,11 +35,10 @@ locals {
 # Indicate the input values to use for the variables of the module.
 inputs = {
   region               = local.region
+  profile              = local.profile
   cidr                 = local.cidr
   instance_type        = local.instance_type
-  key_name_bastion     = local.key_name_bastion
   sg_alb_ingress_ports = local.sg_alb_ingress_ports
-  sg_bas_ingress_ports = local.sg_bas_ingress_ports
   sg_asg_ingress_ports = local.sg_asg_ingress_ports
   github_url_app       = local.github_url_app
   github_url_iac       = local.github_url_iac
@@ -65,16 +53,14 @@ inputs = {
     Environment = "${local.env}"
   }
 }
+
 remote_state {
   backend = "s3"
-  generate = {
-    path      = "backend.tf"
-    if_exists = "skip"
-  }
-  config = {
-    bucket = "my-terraform-state-${local.env}-${local.app_name}"
 
-    key = "${path_relative_to_include()}/terraform.tfstate"
+  config = {
+    bucket         = "my-terraform-state-${local.env}-${local.app_name}"
+    profile        = "${local.profile}"
+    key            = "${path_relative_to_include()}/terraform.tfstate"
     region         = "${local.region}"
     encrypt        = true
     dynamodb_table = "my-lock-table-${local.env}-${local.app_name}"

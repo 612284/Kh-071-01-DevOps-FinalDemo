@@ -15,9 +15,9 @@
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
-        "awslogs-group": "claster-${env}-${app_name}",
+        "awslogs-group": "cluster-${env}-${app_name}",
         "awslogs-region": "${region}",
-        "awslogs-stream-prefix": "claster-stream-${env}-${app_name}"
+        "awslogs-stream-prefix": "cluster-stream-${env}-${app_name}"
        }
      },
     "environment": []

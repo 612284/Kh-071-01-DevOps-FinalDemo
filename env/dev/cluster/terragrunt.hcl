@@ -1,5 +1,5 @@
 terraform {
-  source = "../../../modules//claster"
+  source = "../../../modules//cluster"
 }
 include {
   path = find_in_parent_folders()
