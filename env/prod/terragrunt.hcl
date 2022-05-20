@@ -12,23 +12,30 @@ locals {
   env                  = "prod"
   private_subnets_map = {
     subnet_1 = {
-      az   = "eu-central-1a"
+      az   = "${local.region}a"
       cidr = "10.10.1.0/24"
     }
     subnet_2 = {
-      az   = "eu-central-1b"
+      az   = "${local.region}b"
       cidr = "10.10.2.0/24"
     }
   }
   public_subnets_map = {
     subnet_1 = {
-      az   = "eu-central-1a"
+      az   = "${local.region}a"
       cidr = "10.10.101.0/24"
     }
     subnet_2 = {
-      az   = "eu-central-1b"
+      az   = "${local.region}b"
       cidr = "10.10.102.0/24"
     }
+  }
+  codebuild_env_vars = {
+      TERRAFORM_VERSION  = "1.1.9"
+      TERRAGRUNT_VERSION = "0.37.0"
+      APP_NAME           = "${local.app_name}"
+      ENV                = "${local.env}"
+      AWS_DEFAULT_REGION = "${local.region}"
   }
 }
 
@@ -47,6 +54,7 @@ inputs = {
   env                  = local.env
   private_subnets_map  = local.private_subnets_map
   public_subnets_map   = local.public_subnets_map
+  codebuild_env_vars   = local.codebuild_env_vars
 
   tags = {
     Terraform = "true"

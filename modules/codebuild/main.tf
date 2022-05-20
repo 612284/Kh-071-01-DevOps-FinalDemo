@@ -19,34 +19,13 @@ resource "aws_codebuild_project" "this" {
     type                        = "LINUX_CONTAINER"
     privileged_mode             = true
     image_pull_credentials_type = "CODEBUILD"
-    # environment_variable {
-    #   name  = "AWS_ACCESS_KEY_ID"
-    #   value = var.AWS_ACCESS_KEY_ID
-    # }
-    # environment_variable {
-    #   name  = "AWS_SECRET_ACCESS_KEY"
-    #   value = var.AWS_SECRET_ACCESS_KEY
-    # }
 
-    environment_variable {
-      name  = "TERRAFORM_VERSION"
-      value = "1.1.9"
-    }
-    environment_variable {
-      name  = "TERRAGRUNT_VERSION"
-      value = "0.37.0"
-    }
-    environment_variable {
-      name  = "APP_NAME"
-      value = var.app_name
-    }
-    environment_variable {
-      name  = "ENV"
-      value = var.env
-    }
-    environment_variable {
-      name  = "AWS_DEFAULT_REGION"
-      value = var.region
+    dynamic "environment_variable" {
+      for_each = var.codebuild_env_vars
+      content {
+        name  = environment_variable.key
+        value = environment_variable.value
+      }
     }
   }
 
@@ -105,6 +84,6 @@ resource "aws_security_group" "codebuild_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name = "codebuild security group"
+    Name = "codebuild-sg-${var.env}-${var.app_name}"
   }
 }

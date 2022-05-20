@@ -65,7 +65,7 @@ phases:
       - cd ${CODEBUILD_SRC_DIR}
       - ls ${CODEBUILD_SRC_DIR}/env/dev/cluster/
       - terragrunt plan --terragrunt-working-dir env/dev/cluster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out
-      - terragrunt apply --terragrunt-working-dir env/dev/cluster/ -auto-approve -no-color -input=false plan.out --terragrunt-log-level debug
+      - terragrunt apply --terragrunt-working-dir env/dev/cluster/ -auto-approve -no-color -input=false plan.out 
   post_build:
     commands:
       - docker images
