@@ -1,4 +1,12 @@
+resource "aws_codebuild_source_credential" "this" {
+  auth_type   = "PERSONAL_ACCESS_TOKEN"
+  server_type = "GITHUB"
+  token       = var.github_token
+}
+
 resource "aws_codebuild_project" "this" {
+  depends_on = [aws_codebuild_source_credential.this]
+
   name          = "cb-project-${var.env}-${var.app_name}"
   description   = "codebuild_project_${var.env}_${var.app_name}"
   build_timeout = "5"
@@ -58,6 +66,17 @@ resource "aws_codebuild_project" "this" {
     Environment = "${var.env}"
   }
 }
+resource "aws_codebuild_webhook" "webhook" {
+  project_name = aws_codebuild_project.this.name
+  # branch_filter = "main"
+  filter_group {
+    filter {
+      type    = "EVENT"
+      pattern = "PUSH"
+    }
+  }
+}
+
 resource "aws_security_group" "codebuild_sg" {
   vpc_id = var.vpc_id
   name   = "codebuild security group"

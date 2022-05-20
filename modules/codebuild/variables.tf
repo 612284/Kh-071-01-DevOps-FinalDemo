@@ -18,6 +18,12 @@ variable "env" {
   type        = string
   default     = ""
 }
+
+variable "github_token" {
+  description = "github token"
+  type        = string
+  default     = ""
+}
 variable "github_url_app" {
   description = "github url app"
   type        = string
