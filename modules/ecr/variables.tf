@@ -8,3 +8,13 @@ variable "region" {
   type        = string
   default     = ""
 }
+variable "app_name" {
+  description = "app name"
+  type        = string
+  default     = ""
+}
+variable "env" {
+  description = ""
+  type        = string
+  default     = ""
+}
