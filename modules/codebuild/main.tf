@@ -47,7 +47,7 @@ resource "aws_codebuild_project" "this" {
   source {
     buildspec           = "env/${var.env}/buildspec.yml"
     type                = "GITHUB"
-    location            = var.github_url_iac
+    location            = var.github_url_app
     git_clone_depth     = 1
     report_build_status = "true"
 
@@ -58,7 +58,7 @@ resource "aws_codebuild_project" "this" {
   source_version = "main"
   secondary_sources {
     type              = "GITHUB"
-    location          = var.github_url_app
+    location          = var.github_url_iac
     source_identifier = "app"
   }
 
