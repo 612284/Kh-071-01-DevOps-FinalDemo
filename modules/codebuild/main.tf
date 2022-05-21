@@ -49,7 +49,7 @@ resource "aws_codebuild_project" "this" {
     location            = var.github_url_app
     git_clone_depth     = 1
     report_build_status = "true"
-
+    source_identifier   = "APP"
     git_submodules_config {
       fetch_submodules = true
     }
@@ -59,7 +59,7 @@ resource "aws_codebuild_project" "this" {
     buildspec         = "env/${var.env}/buildspec.yml"
     type              = "GITHUB"
     location          = var.github_url_iac
-    source_identifier = "app"
+    source_identifier = "IAC"
   }
 
   tags = {
