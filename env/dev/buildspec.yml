@@ -41,5 +41,5 @@ phases:
   post_build:
     commands:
       - docker images
-      - docker tag ${APP_NAME}:${TAG} ${REGISTRY_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${APP_NAME}:${TAG}
-      - docker push ${REGISTRY_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${APP_NAME}:${TAG}
+      - docker tag ${APP_NAME}:${TAG} ${REGISTRY_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${ENV}-${APP_NAME}:${TAG}
+      - docker push ${REGISTRY_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${ENV}-${APP_NAME}:${TAG}
