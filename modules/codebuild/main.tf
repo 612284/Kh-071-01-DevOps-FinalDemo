@@ -45,9 +45,9 @@ resource "aws_codebuild_project" "this" {
   }
 
   source {
-    buildspec           = "buildspec.yml"
+    buildspec           = "env/${var.env}/buildspec.yml"
     type                = "GITHUB"
-    location            = var.github_url_app
+    location            = var.github_url_iac
     git_clone_depth     = 1
     report_build_status = "true"
     git_submodules_config {
@@ -55,16 +55,16 @@ resource "aws_codebuild_project" "this" {
     }
   }
   source_version = "main"
-  secondary_sources {
-    buildspec         = "env/${var.env}/buildspec.yml"
-    type              = "GITHUB"
-    location          = var.github_url_iac
-    source_identifier = "IAC"
-  }
-  secondary_source_version {
-    source_identifier = "IAC"
-    source_version    = "main"
-  }
+  # secondary_sources {
+  #   buildspec         = "buildspec.yml"
+  #   type              = "GITHUB"
+  #   location          = var.github_url_app
+  #   source_identifier = "APP"
+  # }
+  # secondary_source_version {
+  #   source_identifier = "APP"
+  #   source_version    = "main"
+  # }
   tags = {
     Environment = "${var.env}"
   }

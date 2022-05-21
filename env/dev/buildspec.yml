@@ -1,24 +1,4 @@
 version: 0.2
-
-#env:
-  #variables:
-     # key: "value"
-     # key: "value"
-  #parameter-store:
-     # key: "value"
-     # key: "value"
-  #secrets-manager:
-     # key: secret-id:json-key:version-stage:version-id
-     # key: secret-id:json-key:version-stage:version-id
-  #exported-variables:
-     # - variable
-     # - variable
-  #git-credential-helper: yes
-#batch:
-  #fast-fail: true
-  #build-list:
-  #build-matrix:
-  #build-graph:
 phases:
   install:
     commands:
@@ -31,7 +11,6 @@ phases:
       - terraform --version
       - terragrunt --version
       - ls "$CODEBUILD_SRC_DIR"
-      - ls "$CODEBUILD_SRC_DIR_IAC"
       - docker --version
       - whoami
       - cat /proc/version
@@ -48,44 +27,19 @@ phases:
   build:
     commands:
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REGISTRY_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
-      - echo  "${APP_NAME}"
-      - echo  "${AWS_ACCESS_KEY_ID}"
-      - echo  ${APP_NAME}
-      - echo  ${AWS_SECRET_ACCESS_KEY}
-      - echo  $APP_NAME
-      - echo  $ACCESS_KEY
-      - cd "${CODEBUILD_SRC_DIR}"
+      - cd "${CODEBUILD_SRC_DIR}/app"
       - ls -la
-      - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
+      - export TAG=$ENV-$(git rev-parse HEAD)
       - echo "Building version ${TAG}"
       - echo $APP_NAME
       - docker build -t $APP_NAME:$TAG .
       - docker tag $APP_NAME:$TAG $REPO_NAME:$TAG
 
-      - cd ${CODEBUILD_SRC_DIR_IAC}
-      - ls ${CODEBUILD_SRC_DIR_IAC}/env/dev/cluster/
-      - terragrunt plan --terragrunt-working-dir env/dev/cluster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out
-      - terragrunt apply --terragrunt-working-dir env/dev/cluster/ -auto-approve -no-color -input=false plan.out
+      - cd ${CODEBUILD_SRC_DIR}
+      - terragrunt plan --terragrunt-working-dir env/${ENV}/cluster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out
+      - terragrunt apply --terragrunt-working-dir env/${ENV}/cluster/ -auto-approve -no-color -input=false plan.out
   post_build:
     commands:
       - docker images
       - docker tag ${APP_NAME}:${TAG} ${REGISTRY_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${APP_NAME}:${TAG}
       - docker push ${REGISTRY_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${APP_NAME}:${TAG}
-#reports:
-  #report-name-or-arn:
-    #files:
-      # - location
-      # - location
-    #base-directory: location
-    #discard-paths: yes
-    #file-format: JunitXml | CucumberJson
-#artifacts:
-  #files:
-    # - location
-    # - location
-  #name: $(date +%Y-%m-%d)
-  #discard-paths: yes
-  #base-directory: location
-#cache:
-  #paths:
-    # - paths
