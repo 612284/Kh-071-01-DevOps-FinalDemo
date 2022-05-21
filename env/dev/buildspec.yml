@@ -31,7 +31,7 @@ phases:
       - terraform --version
       - terragrunt --version
       - ls "$CODEBUILD_SRC_DIR"
-      - ls "$CODEBUILD_SRC_DIR_app"
+      - ls "$CODEBUILD_SRC_DIR_IAC"
       - docker --version
       - whoami
       - cat /proc/version
@@ -54,7 +54,7 @@ phases:
       - echo  ${AWS_SECRET_ACCESS_KEY}
       - echo  $APP_NAME
       - echo  $ACCESS_KEY
-      - cd "${CODEBUILD_SRC_DIR_app}"
+      - cd "${CODEBUILD_SRC_DIR}"
       - ls -la
       - export TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}"
       - echo "Building version ${TAG}"
@@ -62,10 +62,10 @@ phases:
       - docker build -t $APP_NAME:$TAG .
       - docker tag $APP_NAME:$TAG $REPO_NAME:$TAG
 
-      - cd ${CODEBUILD_SRC_DIR}
-      - ls ${CODEBUILD_SRC_DIR}/env/dev/cluster/
+      - cd ${CODEBUILD_SRC_DIR_IAC}
+      - ls ${CODEBUILD_SRC_DIR_IAC}/env/dev/cluster/
       - terragrunt plan --terragrunt-working-dir env/dev/cluster/ -var="app_tag=${TAG}" -no-color -input=false -out plan.out
-      - terragrunt apply --terragrunt-working-dir env/dev/cluster/ -auto-approve -no-color -input=false plan.out 
+      - terragrunt apply --terragrunt-working-dir env/dev/cluster/ -auto-approve -no-color -input=false plan.out
   post_build:
     commands:
       - docker images
