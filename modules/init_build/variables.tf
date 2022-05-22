@@ -13,7 +13,7 @@ variable "registry_id" {
   type        = string
   default     = ""
 }
-variable "github_url_app" {
+variable "github_url_iac" {
   description = "github url app"
   type        = string
   default     = ""
@@ -34,6 +34,26 @@ variable "profile" {
   default     = ""
 }
 variable "working_dir" {
+  description = ""
+  type        = string
+  default     = ""
+}
+variable "instance_type" {
+  description = "instance type"
+  type        = string
+  default     = ""
+}
+variable "vpc_id" {
+  description = "A list of private subnets id inside the VPC"
+  type        = string
+  default     = ""
+}
+variable "public_subnets_id" {
+  description = "A list of public subnets id inside the VPC"
+  type        = list(string)
+  default     = []
+}
+variable "env" {
   description = ""
   type        = string
   default     = ""

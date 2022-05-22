@@ -54,7 +54,7 @@ resource "aws_codebuild_project" "this" {
       fetch_submodules = true
     }
   }
-  source_version = "main"
+  source_version = var.github_source_version
   # secondary_sources {
   #   buildspec         = "buildspec.yml"
   #   type              = "GITHUB"
@@ -75,11 +75,11 @@ resource "aws_codebuild_webhook" "webhook" {
   filter_group {
     filter {
       type    = "EVENT"
-      pattern = "PUSH"
+      pattern = var.github_event
     }
     filter {
       type    = "HEAD_REF"
-      pattern = "dev"
+      pattern = var.github_head_ref
     }
   }
 }

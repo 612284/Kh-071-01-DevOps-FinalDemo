@@ -18,3 +18,8 @@ variable "env" {
   type        = string
   default     = ""
 }
+variable "build_count" {
+  description = ""
+  type        = string
+  default     = ""
+}

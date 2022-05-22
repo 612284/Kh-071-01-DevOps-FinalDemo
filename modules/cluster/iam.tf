@@ -10,12 +10,12 @@ data "aws_iam_policy_document" "ecs_agent" {
 }
 
 resource "aws_iam_role" "ecs_agent" {
-  name               = "ecs-agent"
+  name               = "ecs-agent-${var.env}-${var.app_name}"
   assume_role_policy = data.aws_iam_policy_document.ecs_agent.json
 }
 
 resource "aws_iam_instance_profile" "ecs_agent" {
-  name = "ecs-agent"
+  name = "ecs-agent-${var.env}-${var.app_name}"
   role = aws_iam_role.ecs_agent.name
 }
 
