@@ -32,6 +32,7 @@ phases:
       - export TAG=$ENV-$(git rev-parse HEAD)
       - echo "Building version ${TAG}"
       - echo $APP_NAME
+      - git checkout dev
       - docker build -t $APP_NAME:$TAG .
       - docker tag $APP_NAME:$TAG $REPO_NAME:$TAG
 
