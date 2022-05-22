@@ -1,7 +1,7 @@
 locals {
   region                = "eu-central-1"
   profile               = "default"
-  cidr                  = "10.0.0.0/16"
+  cidr                  = "10.10.0.0/16"
   instance_type         = "t2.micro"
   sg_alb_ingress_ports  = ["80"]
   sg_asg_ingress_ports  = ["49153", "49154", "49155", "49156", "49157"]
@@ -9,29 +9,29 @@ locals {
   github_url_iac        = "https://github.com/612284/Kh-071-01-DevOps-FinalDemo.git"
   app_name              = "flask"
   app_tag               = "1"
-  env                   = "dev"
+  env                   = "prod"
   build_count           = "10"
-  github_event          = "PUSH"
-  github_head_ref       = "dev"
-  github_source_version = "dev"
+  github_event          = "PULL_REQUEST_MERGED"
+  github_head_ref       = "main"
+  github_source_version = "main"
   private_subnets_map = {
     subnet_1 = {
       az   = "${local.region}a"
-      cidr = "10.0.1.0/24"
+      cidr = "10.10.1.0/24"
     }
     # subnet_2 = {
     #   az   = "${local.region}b"
-    #   cidr = "10.0.2.0/24"
+    #   cidr = "10.10.2.0/24"
     # }
   }
   public_subnets_map = {
     subnet_1 = {
       az   = "${local.region}a"
-      cidr = "10.0.101.0/24"
+      cidr = "10.10.101.0/24"
     }
     subnet_2 = {
       az   = "${local.region}b"
-      cidr = "10.0.102.0/24"
+      cidr = "10.10.102.0/24"
     }
   }
   codebuild_env_vars = {
@@ -69,7 +69,6 @@ inputs = {
     Environment = "${local.env}"
   }
 }
-
 remote_state {
   backend = "s3"
 
@@ -82,6 +81,7 @@ remote_state {
     dynamodb_table = "my-lock-table-${local.env}-${local.app_name}"
   }
 }
+
 terraform {
   after_hook "remove_lock" {
     commands = [

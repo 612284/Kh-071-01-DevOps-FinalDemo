@@ -7,10 +7,8 @@ resource "aws_launch_template" "worker_template" {
   image_id                             = data.aws_ami.latest_amason_linyx.id
   instance_initiated_shutdown_behavior = "terminate"
   instance_type                        = var.instance_type
-  # key_name                             = var.generated_key_name
-  vpc_security_group_ids = [aws_security_group.worker.id]
+  vpc_security_group_ids               = [aws_security_group.worker.id]
 
-  # user_data = filebase64("launch_tmpl_usr_data.sh")
   user_data = base64encode(
     templatefile(
       "launch_tmpl_usr_data.sh",

@@ -1,5 +1,5 @@
 terraform {
-  source = "../../../modules//local_build"
+  source = "../../../modules//init_build"
 }
 include {
   path = find_in_parent_folders()
@@ -12,12 +12,18 @@ dependency "ecr" {
   }
   # skip_outputs = true
 }
+dependency "vpc" {
+  config_path = "../vpc"
+  mock_outputs = {
+    vpc_id = "vpc-000000000000"
+    public_subnets_id = ["subnet-00000000000","subnet-00000000001" ]
+  }
+}
+
 
 inputs = {
   ecr_url = dependency.ecr.outputs.ecr_url
   registry_id = dependency.ecr.outputs.registry_id
-  # region      = var.region
-  # github_url  = var.github_url
-  # app_name    = var.app_name
-  # app_tag     = var.app_tag
+  public_subnets_id = dependency.vpc.outputs.public_subnets_id
+  vpc_id = dependency.vpc.outputs.vpc_id
 }

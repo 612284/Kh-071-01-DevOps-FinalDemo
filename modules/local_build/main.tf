@@ -4,13 +4,14 @@ terraform {
 
 resource "null_resource" "build" {
   provisioner "local-exec" {
-    command = "bash build.sh"
-    # working_dir = var.working_dir
+    command     = "bash build.sh"
+    working_dir = var.working_dir
     environment = {
       region         = var.region
       ecr_url        = var.ecr_url
       registry_id    = var.registry_id
-      github_url_app = var.github_url_app
+      working_dir    = var.working_dir
+      github_url_iac = var.github_url_iac
       app_name       = var.app_name
       app_tag        = var.app_tag
     }
