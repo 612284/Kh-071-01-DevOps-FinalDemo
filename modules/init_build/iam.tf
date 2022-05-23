@@ -23,7 +23,7 @@ resource "aws_iam_instance_profile" "this" {
   role = aws_iam_role.init_build_role.name
 }
 
-resource "aws_iam_role_policy" "cobebuild_policy" {
+resource "aws_iam_role_policy" "initbuild_policy" {
   role = aws_iam_role.init_build_role.name
   name = "init_build-policy-${var.env}-${var.app_name}"
 

@@ -24,13 +24,8 @@ variable "github_token" {
   type        = string
   default     = ""
 }
-variable "github_url_app" {
-  description = "github url app"
-  type        = string
-  default     = ""
-}
-variable "github_url_iac" {
-  description = "github url infrastructure as code"
+variable "github_url" {
+  description = "github url"
   type        = string
   default     = ""
 }
@@ -54,7 +49,7 @@ variable "github_commit_message" {
   type        = string
   default     = ""
 }
-variable "github_source_version" {
+variable "github_branch" {
   description = ""
   type        = string
   default     = ""

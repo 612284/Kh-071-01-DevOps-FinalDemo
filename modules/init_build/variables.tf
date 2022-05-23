@@ -13,8 +13,13 @@ variable "registry_id" {
   type        = string
   default     = ""
 }
-variable "github_url_iac" {
-  description = "github url app"
+variable "github_url" {
+  description = "github url"
+  type        = string
+  default     = ""
+}
+variable "github_branch" {
+  description = "github branch"
   type        = string
   default     = ""
 }

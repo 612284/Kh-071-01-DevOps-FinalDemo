@@ -103,15 +103,6 @@ resource "aws_security_group" "worker" {
   vpc_id = var.vpc_id
   name   = "worker-sg-${var.env}-${var.app_name}"
 
-  # dynamic "ingress" {
-  #   for_each = var.sg_asg_ingress_ports
-  #   content {
-  #     from_port   = ingress.value
-  #     to_port     = ingress.value
-  #     protocol    = "tcp"
-  #     cidr_blocks = ["0.0.0.0/0"]
-  #   }
-  # }
   ingress {
     from_port   = 0
     to_port     = 0
