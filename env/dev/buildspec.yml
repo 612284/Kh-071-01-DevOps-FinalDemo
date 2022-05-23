@@ -33,7 +33,7 @@ phases:
       - echo "Building version ${TAG}"
       - echo $APP_NAME
       - git checkout dev
-      - docker build -t $APP_NAME:$TAG .
+      - docker build --build-arg gitBranch=dev -t $APP_NAME:$TAG .
       - docker tag $APP_NAME:$TAG $REPO_NAME:$TAG
 
       - cd ${CODEBUILD_SRC_DIR}
