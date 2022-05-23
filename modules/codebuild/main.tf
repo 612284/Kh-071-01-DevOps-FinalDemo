@@ -81,6 +81,10 @@ resource "aws_codebuild_webhook" "webhook" {
       type    = "HEAD_REF"
       pattern = var.github_head_ref
     }
+    filter {
+      type    = "COMMIT_MESSAGE"
+      pattern = var.github_commit_message
+    }
   }
 }
 
