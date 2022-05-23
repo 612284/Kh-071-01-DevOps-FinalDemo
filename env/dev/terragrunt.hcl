@@ -13,7 +13,7 @@ locals {
   build_count           = "10"
   github_event          = "PUSH"
   github_head_ref       = "dev"
-  github_commit_message = "*"
+  github_commit_message = "update"
   github_source_version = "dev"
   private_subnets_map = {
     subnet_1 = {
