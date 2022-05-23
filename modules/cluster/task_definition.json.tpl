@@ -1,7 +1,7 @@
 [
   {
     "essential": true,
-    "memory": 256,
+    "memory": 128,
     "name": "worker-${env}-${app_name}",
     "cpu": 3,
     "image": "${ecr_url}:${app_tag}",

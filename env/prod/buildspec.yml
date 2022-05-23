@@ -13,7 +13,7 @@ phases:
       - ls "$CODEBUILD_SRC_DIR"
       - docker --version
       - whoami
-      - cat /proc/version
+      - cat ${CODEBUILD_SRC_DIR}/app/templates/index.html
       - ls -la /var/run/
       - aws sts get-caller-identity
   pre_build:
