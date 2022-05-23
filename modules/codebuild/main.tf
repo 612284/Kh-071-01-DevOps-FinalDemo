@@ -47,31 +47,20 @@ resource "aws_codebuild_project" "this" {
   source {
     buildspec           = "env/${var.env}/buildspec.yml"
     type                = "GITHUB"
-    location            = var.github_url_iac
+    location            = var.github_url
     git_clone_depth     = 1
     report_build_status = "true"
     git_submodules_config {
       fetch_submodules = true
     }
   }
-  source_version = var.github_source_version
-  # secondary_sources {
-  #   buildspec         = "buildspec.yml"
-  #   type              = "GITHUB"
-  #   location          = var.github_url_app
-  #   source_identifier = "APP"
-  # }
-  # secondary_source_version {
-  #   source_identifier = "APP"
-  #   source_version    = "main"
-  # }
+  source_version = var.github_branch
   tags = {
     Environment = "${var.env}"
   }
 }
 resource "aws_codebuild_webhook" "webhook" {
   project_name = aws_codebuild_project.this.name
-  # branch_filter = "main"
   filter_group {
     filter {
       type    = "EVENT"
@@ -91,22 +80,12 @@ resource "aws_codebuild_webhook" "webhook" {
 resource "aws_security_group" "codebuild_sg" {
   vpc_id = var.vpc_id
   name   = "codebuild security group"
-  # dynamic "ingress" {
-  #   for_each = var.sg_bas_ingress_ports
-  #   content {
-  #     from_port   = ingress.value
-  #     to_port     = ingress.value
-  #     protocol    = "tcp"
-  #     cidr_blocks = ["0.0.0.0/0"]
-  #   }
-  # }
   ingress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   egress {
     from_port   = 0
     to_port     = 0

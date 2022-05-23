@@ -8,7 +8,8 @@ unzip awscliv2.zip
 sudo ./aws/install
 aws sts get-caller-identity
 aws ecr get-login-password --region "${region}" | docker login --username AWS --password-stdin "${registry_id}".dkr.ecr."${region}".amazonaws.com
-git clone "${github_url_iac}"
+git clone "${github_url}"
+git checkout "${github_branch}"
 cd Kh-071-01-DevOps-FinalDemo/app
 ls -la
 docker build -t "${app_name}":"${app_tag}" .

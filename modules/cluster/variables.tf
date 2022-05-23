@@ -17,10 +17,6 @@ variable "sg_alb_ingress_ports" {
   type    = list(string)
   default = []
 }
-variable "sg_asg_ingress_ports" {
-  type    = list(string)
-  default = []
-}
 variable "alb_dns_name" {
   type    = string
   default = ""
