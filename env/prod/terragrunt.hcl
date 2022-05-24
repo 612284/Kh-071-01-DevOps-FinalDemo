@@ -1,5 +1,5 @@
 locals {
-  region                = "eu-central-1"
+  region                = "eu-west-1"
   profile               = "default"
   cidr                  = "10.10.0.0/16"
   instance_type         = "t2.micro"
@@ -8,7 +8,7 @@ locals {
   app_name              = "flask"
   app_tag               = "1"
   env                   = "prod"
-  build_count           = "10"
+  build_count           = 10
   github_event          = "PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_MERGED"
   github_head_ref       = "main"
   github_commit_message = "version"
@@ -71,7 +71,7 @@ remote_state {
   backend = "s3"
 
   config = {
-    bucket         = "my-terraform-state-${local.env}-${local.app_name}"
+    bucket         = "my-terraform-state-${local.env}-${local.app_name}-${local.region}"
     profile        = "${local.profile}"
     key            = "${path_relative_to_include()}/terraform.tfstate"
     region         = "${local.region}"
