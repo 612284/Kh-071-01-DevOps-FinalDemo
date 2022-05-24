@@ -20,6 +20,6 @@ variable "env" {
 }
 variable "build_count" {
   description = ""
-  type        = string
-  default     = ""
+  type        = number
+  default     = 3
 }
