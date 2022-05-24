@@ -23,7 +23,7 @@ phases:
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REGISTRY_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - cd "${CODEBUILD_SRC_DIR}/app"
       - ls -la
-      - export TAG=$ENV-$(git rev-parse HEAD)
+      - export TAG=$ENV-$(git describe --tags --abbrev=0)
       - echo "Building version ${TAG}"
       - echo $APP_NAME
       - docker build -t $APP_NAME:$TAG .
