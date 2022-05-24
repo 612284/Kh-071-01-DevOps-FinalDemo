@@ -11,7 +11,6 @@ locals {
   build_count           = 10
   github_event          = "PUSH"
   github_head_ref       = "dev"
-  github_commit_message = ""
   github_branch         = "dev"
   private_subnets_map = {
     subnet_1 = {
@@ -56,7 +55,6 @@ inputs = {
   build_count           = local.build_count
   github_event          = local.github_event
   github_head_ref       = local.github_head_ref
-  github_commit_message = local.github_commit_message
   github_branch         = local.github_branch
   private_subnets_map   = local.private_subnets_map
   public_subnets_map    = local.public_subnets_map
