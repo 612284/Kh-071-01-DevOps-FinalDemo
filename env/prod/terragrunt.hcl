@@ -10,7 +10,7 @@ locals {
   env                   = "prod"
   build_count           = 10
   github_event          = "PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_MERGED"
-  github_head_ref       = "^refs/tags/prod-.*"
+  github_head_ref       = "^refs/tags/v.*"
   github_commit_message = "version"
   github_branch         = "main"
   private_subnets_map = {
