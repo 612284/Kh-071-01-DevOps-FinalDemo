@@ -9,7 +9,7 @@ locals {
   app_tag               = "1"
   env                   = "dev"
   build_count           = 10
-  github_event          = "PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_MERGED"
+  github_event          = "PUSH"
   github_head_ref       = "dev"
   github_commit_message = ""
   github_branch         = "dev"
