@@ -1,5 +1,5 @@
 locals {
-  region                = "eu-west-1"
+  region                = "eu-central-1"
   profile               = "default"
   cidr                  = "10.10.0.0/16"
   instance_type         = "t2.micro"
@@ -9,7 +9,7 @@ locals {
   app_tag               = "1"
   env                   = "prod"
   build_count           = 10
-  github_event          = "PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, PULL_REQUEST_MERGED"
+  github_event          = "PUSH"
   github_head_ref       = "^refs/tags/v.*"
   github_commit_message = "version"
   github_branch         = "main"
