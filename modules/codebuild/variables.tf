@@ -44,11 +44,6 @@ variable "github_head_ref" {
   type        = string
   default     = ""
 }
-variable "github_commit_message" {
-  description = ""
-  type        = string
-  default     = ""
-}
 variable "github_branch" {
   description = ""
   type        = string
