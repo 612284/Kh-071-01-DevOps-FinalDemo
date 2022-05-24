@@ -1,5 +1,5 @@
 locals {
-  region                = "eu-west-1"
+  region                = "eu-central-1"
   profile               = "default"
   cidr                  = "10.0.0.0/16"
   instance_type         = "t2.micro"
