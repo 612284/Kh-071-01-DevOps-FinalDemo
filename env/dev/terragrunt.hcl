@@ -10,7 +10,7 @@ locals {
   env                   = "dev"
   build_count           = 10
   github_event          = "PUSH"
-  github_head_ref       = "^refs/heads/dev$"
+  github_head_ref       = "dev"
   github_branch         = "dev"
   private_subnets_map = {
     subnet_1 = {
