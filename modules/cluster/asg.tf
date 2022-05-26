@@ -22,9 +22,9 @@ resource "aws_launch_template" "worker_template" {
 
 resource "aws_autoscaling_group" "ecs_asg" {
   name                      = "asg-${var.env}-${var.app_name}"
-  vpc_zone_identifier       = var.public_subnets_id
-  desired_capacity          = 1
-  min_size                  = 1
+  vpc_zone_identifier       = var.private_subnets_id
+  desired_capacity          = 2
+  min_size                  = 2
   max_size                  = 2
   health_check_grace_period = 300
   health_check_type         = "EC2"

@@ -17,10 +17,10 @@ locals {
       az   = "${local.region}a"
       cidr = "10.10.1.0/24"
     }
-    # subnet_2 = {
-    #   az   = "${local.region}b"
-    #   cidr = "10.10.2.0/24"
-    # }
+    subnet_2 = {
+      az   = "${local.region}b"
+      cidr = "10.10.2.0/24"
+    }
   }
   public_subnets_map = {
     subnet_1 = {
