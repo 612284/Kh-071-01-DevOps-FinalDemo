@@ -308,6 +308,20 @@ resource "aws_iam_role_policy" "cobebuild_policy" {
                   "arn:aws:iam::*:role/ecr-sysadmin-*",
                   "arn:aws:iam::*:role/lambda-sysadmin-*"
               ]
+          },
+          {
+              "Sid": "VisualEditor0",
+              "Effect": "Allow",
+              "Action": "ec2:CreateNetworkInterfacePermission",
+              "Resource": "arn:aws:ec2:*:*:network-interface/*",
+              "Condition": {
+                  "StringEquals": {
+                  "ec2:Subnet": [
+                      "arn:aws:ec2:region:account-id:subnet/subnet-*"
+                  ],
+                  "ec2:AuthorizedService": "codebuild.amazonaws.com"
+                 }
+              }
           }
       ],
       "Version": "2012-10-17"
