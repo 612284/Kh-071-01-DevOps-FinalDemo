@@ -310,19 +310,20 @@ resource "aws_iam_role_policy" "cobebuild_policy" {
               ]
           },
           {
-              "Sid": "VisualEditor0",
               "Effect": "Allow",
-              "Action": "ec2:CreateNetworkInterfacePermission",
-              "Resource": "arn:aws:ec2:*:*:network-interface/*",
+              "Action": [
+                "ec2:CreateNetworkInterfacePermission"
+              ],
+              "Resource": "arn:aws:ec2:${var.region}:*:network-interface/*",
               "Condition": {
-                  "StringEquals": {
+                "StringLike": {
                   "ec2:Subnet": [
-                      "arn:aws:ec2:region:account-id:subnet/subnet-*"
+                    "arn:aws:ec2:${var.region}:*:subnet/*"
                   ],
                   "ec2:AuthorizedService": "codebuild.amazonaws.com"
-                 }
+                }
               }
-          }
+            }
       ],
       "Version": "2012-10-17"
 }
